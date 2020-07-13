@@ -3,8 +3,25 @@ class Gear
    private int chainRing,cog;
     private double ratio;
     wheel w;
-    class wheel{
-        private double rim,tyre;
+   
+    Gear(int chainRing,int cog)
+    {
+        this.chainRing=chainRing;
+        this.cog=cog;
+    }
+   public double getRatio()
+    {
+        ratio=(double)chainRing/cog;
+        return ratio;
+    }
+    public double gearInches(wheel w)
+    {
+        this.getRatio();
+        return ratio*w.diameter();
+    }
+}
+ class wheel{
+        private double rim,tyre,PI=3.14;
         wheel(double rim,double tyre)
         {
             this.rim=rim;
@@ -14,28 +31,11 @@ class Gear
         {
             return rim+(2*tyre);
         }
+        public double circumference()
+        {
+            return PI*diameter();
+        }
     }
-    Gear(int chainRing,int cog,double rim,double tyre)
-    {
-         w=new wheel(rim,tyre);
-        this.chainRing=chainRing;
-        this.cog=cog;
-    }
-    Gear(int chainRing,int cog){
-        this.chainRing=chainRing;
-        this.cog=cog;
-    }
-   public double getRatio()
-    {
-        ratio=(double)chainRing/cog;
-        return ratio;
-    }
-    public double gearInches()
-    {
-        this.getRatio();
-        return ratio*w.diameter();
-    }
-}
 
 
 
@@ -51,10 +51,12 @@ public class BicycleProblem
 
      public static void playWithGearInches()
     {
-        Gear g1=new Gear(52,11,26,1.5);
-        Gear g2=new Gear(52,11,24,1.25);
-        System.out.println("Gear Inches for Gear1="+g1.gearInches());
-        System.out.println("Gear Inches for Gear2="+g2.gearInches());
+        Gear g1=new Gear(52,11);
+        wheel w1=new wheel(26,1.5);
+        System.out.println("Diameter of tyre="+w1.diameter());
+        System.out.println("circumference of wheel="+w1.circumference());
+        System.out.println("Gear Inches for Gear1="+g1.gearInches(w1));
+        
     }
 
     public static void main(String args[])
