@@ -1,11 +1,14 @@
-
+interface CalcDiameter
+{
+    public double diameter();
+}
 class Gear
 {
    private int chainRing,cog;
     private double ratio;
-    wheel wheel;
+    CalcDiameter wheel;
    
-    Gear(int chainRing,int cog,wheel wheel)
+    Gear(int chainRing,int cog,CalcDiameter wheel)
     {
         this.chainRing=chainRing;
         this.cog=cog;
@@ -26,7 +29,7 @@ class Gear
        return wheel.diameter();
     }
 }
- class wheel{
+ class wheel implements CalcDiameter{
         private double rim,tyre,PI=3.14;
         wheel(double rim,double tyre)
         {
